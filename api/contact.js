@@ -36,7 +36,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         from: 'Purpose Productions <onboarding@resend.dev>',
-        to: ['info@purposeproductions.co'],
+        to: ['james@purposeproductions.co'],
         reply_to: email,
         subject: `New enquiry from ${name}`,
         text: `${message}\n\n— ${name}\n${email}`,
