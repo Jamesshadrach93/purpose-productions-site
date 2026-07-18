@@ -1,0 +1,25 @@
+.git
+.DS_Store
+*.pyc
+__pycache__/
+.vercel
+
+# Source / working files not needed by the deployed site
+More photos/
+Photos in the studio/
+Website logos/
+assets/logos/_original_padded/
+moodboard.html
+
+# Big raw source clips (compressed versions are in assets/clips/clip-{1..4}.mp4)
+assets/clips/Business Secrets_ The Power of Little Things.mp4
+assets/clips/Gold-FINAL.mp4
+assets/clips/steph01_FULL.mp4
+assets/clips/clip 4.mp4
+assets/hero-video.mp4
+assets/bish in studio.jpg
+
+# Local dev scratch
+scratchpad/
+tasks/
+.claude/
