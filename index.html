@@ -114,7 +114,7 @@
   <div class="wrap--narrow">
     <div class="sec-head--center center">
       <span class="sec-eyebrow">Pricing</span>
-      <h2 class="sec-title" style="margin-left:auto;margin-right:auto;">One price. <span class="accent">All in.</span></h2>
+      <h2 class="sec-title" style="margin-left:auto;margin-right:auto;"><span class="accent">Podcasting.</span> One price, all in.</h2>
       <p class="sec-lede">One session covers everything from studio to finished files.</p>
     </div>
     <div class="pricing-card">
@@ -254,6 +254,7 @@
         <span>Message</span>
         <textarea name="message" rows="4" required></textarea>
       </label>
+      <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
       <button type="submit" class="btn btn--primary contact-form__submit">Send enquiry →</button>
       <p class="contact-form__note" data-role="status"></p>
     </form>
@@ -264,24 +265,55 @@
   (function () {
     var form = document.getElementById('contact-form');
     if (!form) return;
-    form.addEventListener('submit', function (e) {
+    var status = form.querySelector('[data-role="status"]');
+    var submit = form.querySelector('.contact-form__submit');
+
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
+
       var data = new FormData(form);
-      var name = (data.get('name') || '').toString().trim();
-      var email = (data.get('email') || '').toString().trim();
-      var message = (data.get('message') || '').toString().trim();
-      var status = form.querySelector('[data-role="status"]');
-      if (!name || !email || !message) {
-        if (status) status.textContent = 'Please fill out every field.';
+      var payload = {
+        name: (data.get('name') || '').toString().trim(),
+        email: (data.get('email') || '').toString().trim(),
+        message: (data.get('message') || '').toString().trim(),
+        website: (data.get('website') || '').toString(),
+      };
+
+      if (!payload.name || !payload.email || !payload.message) {
+        status.textContent = 'Please fill out every field.';
+        status.style.color = '';
         return;
       }
-      var subject = 'New enquiry from ' + name;
-      var body = message + '\n\n— ' + name + '\n' + email;
-      var href = 'mailto:info@purposeproductions.co'
-        + '?subject=' + encodeURIComponent(subject)
-        + '&body=' + encodeURIComponent(body);
-      window.location.href = href;
-      if (status) status.textContent = 'Opening your email app…';
+
+      submit.disabled = true;
+      var originalText = submit.textContent;
+      submit.textContent = 'Sending…';
+      status.style.color = '';
+      status.textContent = '';
+
+      try {
+        var resp = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        var body = await resp.json().catch(function () { return {}; });
+
+        if (resp.ok) {
+          form.reset();
+          status.style.color = 'rgba(180, 220, 180, 0.9)';
+          status.textContent = "Thanks — we've got your message and we'll come back to you within a business day.";
+        } else {
+          status.style.color = 'rgba(255, 200, 200, 0.9)';
+          status.textContent = body.error || 'Something went wrong. Try again in a moment.';
+        }
+      } catch (err) {
+        status.style.color = 'rgba(255, 200, 200, 0.9)';
+        status.textContent = 'Network issue — try again, or email info@purposeproductions.co directly.';
+      } finally {
+        submit.disabled = false;
+        submit.textContent = originalText;
+      }
     });
   })();
 </script>
