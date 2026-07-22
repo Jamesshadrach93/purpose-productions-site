@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    { "source": "/podcast-studio", "destination": "/podcasting.html", "permanent": true },
+    { "source": "/video-production", "destination": "/video.html", "permanent": true },
+    { "source": "/studio", "destination": "/about.html", "permanent": true },
+    { "source": "/book-online", "destination": "/#contact", "permanent": true },
+    { "source": "/blank", "destination": "/", "permanent": true }
+  ]
+}
