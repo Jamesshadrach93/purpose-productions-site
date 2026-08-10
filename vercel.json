@@ -4,6 +4,8 @@
     { "source": "/video-production", "destination": "/video.html", "permanent": true },
     { "source": "/studio", "destination": "/about.html", "permanent": true },
     { "source": "/book-online", "destination": "/#contact", "permanent": true },
-    { "source": "/blank", "destination": "/", "permanent": true }
+    { "source": "/blank", "destination": "/", "permanent": true },
+    { "source": "/contact", "destination": "/#contact", "permanent": true },
+    { "source": "/melbourne-video-lp", "destination": "/video.html", "permanent": true }
   ]
 }
