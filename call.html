@@ -73,17 +73,17 @@
     .lp-strip { grid-template-columns: repeat(2, 1fr); }
   }
 
-  /* Logos */
-  .lp-logos { padding: 44px 24px; text-align: center; }
+  /* Logos — white marks, so this band stays dark */
+  .lp-logos { padding: 44px 24px 56px; text-align: center; background: var(--bg-dark-2); }
   .lp-logos p {
     font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 26px;
+    color: rgba(255,255,255,0.55); margin-bottom: 26px;
   }
   .lp-logos__row {
     display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
     gap: 32px 44px; max-width: 1000px; margin: 0 auto;
   }
-  .lp-logos__row img { height: 30px; width: auto; filter: grayscale(1); opacity: 0.55; }
+  .lp-logos__row img { height: 30px; width: auto; opacity: 0.85; }
 
   /* Wizard */
   .wiz { max-width: 640px; margin: 0 auto; }
@@ -169,9 +169,8 @@
 <!-- HERO -->
 <header class="lp-hero">
   <img src="assets/logo.svg" alt="Purpose Productions" class="logo-svg">
-  <div class="lp-eyebrow">For service-based business owners</div>
-  <h1>A podcast that wins you clients. <span class="accent">Done for you.</span></h1>
-  <p class="lp-sub">We film, edit and publish everything from our South Melbourne studio. You turn up and talk — one afternoon can bank a month of content.</p>
+  <h1>A podcast that builds your brand. <span class="accent">Everything handled for you.</span></h1>
+  <p class="lp-sub">We guide you through everything it takes to make content that grows your business — planned, filmed, edited and published from our South Melbourne studio.</p>
 
   <div class="lp-video">
     <video id="vsl" src="assets/call-vsl.mp4" poster="assets/call-vsl-poster.jpg" preload="metadata" playsinline></video>
@@ -181,7 +180,6 @@
   </div>
 
   <a class="btn btn--primary" href="#book">Book a free 15-minute planning call →</a>
-  <p class="lp-micro">You'll leave with an episode plan and a clear cost — whether you work with us or not.</p>
 </header>
 
 <!-- LOGOS -->
@@ -309,7 +307,7 @@
       <li>Clients buy you before they buy the service — trust is what wins you the work</li>
       <li>You know you should be putting out content, but it keeps sliding down the list</li>
       <li>You have expertise worth hearing — you just don't want a second job as a video editor</li>
-      <li>You'd trade an hour of daily fiddling for one focused afternoon a month</li>
+      <li>You'd love to walk into a studio ready to go, and walk out with your content done</li>
     </ul>
     <a class="btn btn--primary" href="#book">Sounds like me →</a>
   </div>
@@ -328,7 +326,7 @@
   <div class="wrap">
     <div class="sec-head--center center">
       <span class="sec-eyebrow">How it works</span>
-      <h2 class="sec-title" style="margin-left:auto;margin-right:auto;">Three steps. <span class="accent">One afternoon a month.</span></h2>
+      <h2 class="sec-title" style="margin-left:auto;margin-right:auto;">Three steps. <span class="accent">That's it.</span></h2>
     </div>
     <div class="features">
       <div class="card">
@@ -382,7 +380,7 @@
       </details>
       <details class="faq__item">
         <summary class="faq__q">How much of my time does it take?</summary>
-        <div class="faq__a">One afternoon can bank a month of episodes — up to eight in a full day if you want to get ahead. We handle editing, clips and publishing, so your involvement ends when the recording does.</div>
+        <div class="faq__a">That's up to you — weekly, fortnightly or monthly all work, and many clients bank several episodes in one sitting. We handle editing, clips and publishing, so your involvement ends when the recording does.</div>
       </details>
       <details class="faq__item">
         <summary class="faq__q">What if nobody listens?</summary>
