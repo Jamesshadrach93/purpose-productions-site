@@ -180,7 +180,7 @@
     </button>
   </div>
 
-  <a class="btn btn--primary" href="#book">Book a free 20-minute planning call →</a>
+  <a class="btn btn--primary" href="#book">Book a free 15-minute planning call →</a>
   <p class="lp-micro">You'll leave with an episode plan and a clear cost — whether you work with us or not.</p>
 </header>
 
@@ -206,7 +206,7 @@
     <div class="sec-head--center center">
       <span class="sec-eyebrow">Next step</span>
       <h2 class="sec-title" style="margin-left:auto;margin-right:auto;">Book a free planning call.</h2>
-      <p class="sec-lede">Twenty minutes. We map your show — format, first episodes, exact costs — and the plan is yours to keep either way.</p>
+      <p class="sec-lede">Fifteen minutes. We map your show — format, first episodes, exact costs — and the plan is yours to keep either way.</p>
     </div>
 
     <div class="wiz">
@@ -260,7 +260,7 @@
         <!-- Step 4: details -->
         <div class="wiz-panel" data-step="4">
           <div class="wiz-q">Last step — where do we reach you?</div>
-          <div class="wiz-hint">We'll come back within one business day to lock in a time.</div>
+          <div class="wiz-hint">Then pick a time that suits, right on the next screen.</div>
           <form id="call-form" novalidate>
             <label class="wiz-field"><span>Your name</span>
               <input type="text" name="name" autocomplete="name" required>
@@ -289,10 +289,10 @@
         <div class="wiz-panel" data-step="done">
           <div class="wiz-done">
             <div class="wiz-done__icon">✓</div>
-            <div class="wiz-q">Thanks — that's everything we need.</div>
-            <p class="wiz-hint" style="margin-bottom:0;">We'll come back to you within one business day to lock in a time that suits.</p>
-            <!-- Calendly (or Cal.com) inline embed goes here once the account is set up,
-                 so people can pick a time on the spot instead of waiting for our reply. -->
+            <div class="wiz-q">Thanks — now lock in your time.</div>
+            <p class="wiz-hint">Pick a slot below and it's booked, with a Google Meet invite in your inbox.</p>
+            <iframe id="booking-embed" data-src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0sWtsW08HwTIP-Vc1E578No5FTl3o4OAFb8sbQQMSCU6da3jcmsdOVnSlcCbHZ1wdeGaOQHtme?gv=true" title="Book your call" style="width:100%;height:640px;border:1px solid var(--divider);border-radius:12px;background:#fff;"></iframe>
+            <p class="wiz-hint" style="margin:14px 0 0;">Calendar not loading? <a href="https://calendar.app.google/t1kHhcPbvEFTCcCm9" target="_blank" rel="noopener" style="color:var(--purple);font-weight:600;text-decoration:underline;">Open the booking page</a> — or do nothing, and we'll come back to you within one business day.</p>
           </div>
         </div>
       </div>
@@ -370,7 +370,7 @@
     <div class="faq">
       <details class="faq__item">
         <summary class="faq__q">What actually happens on the call?</summary>
-        <div class="faq__a">Twenty minutes with James, not a sales script. We map a show format that fits your business, sketch your first episodes and give you exact costs. If it's not a fit, we'll say so — and the plan is still yours.</div>
+        <div class="faq__a">Fifteen minutes with James, not a sales script. We map a show format that fits your business, sketch your first episodes and give you exact costs. If it's not a fit, we'll say so — and the plan is still yours.</div>
       </details>
       <details class="faq__item">
         <summary class="faq__q">How much does it cost?</summary>
@@ -414,7 +414,7 @@
 <!-- FINAL CTA -->
 <section class="lp-final">
   <h2>Ready when you are.</h2>
-  <p>Twenty minutes. An episode plan and a clear cost, whether you book a session or not.</p>
+  <p>Fifteen minutes. An episode plan and a clear cost, whether you book a session or not.</p>
   <a class="btn btn--primary" href="#book">Book a free planning call →</a>
 </section>
 
@@ -521,6 +521,8 @@
 
         if (resp.ok) {
           if (typeof fbq === 'function') fbq('track', 'Lead');
+          var embed = document.getElementById('booking-embed');
+          if (embed && !embed.src) embed.src = embed.getAttribute('data-src');
           show('done');
         } else {
           status.textContent = body.error || 'Something went wrong. Try again in a moment.';
