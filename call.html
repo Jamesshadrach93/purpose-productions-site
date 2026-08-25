@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en" style="scroll-behavior:smooth;">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a call — Purpose Productions</title>
+<meta name="description" content="A free 20-minute planning call for service-based business owners. Leave with a podcast plan and a clear cost — whether you work with us or not.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+<!-- Meta Pixel: paste the standard Pixel base code from Events Manager here.
+     The form below fires fbq('track', 'Lead') on successful submission —
+     it does nothing until the base code exists, so this is safe to leave. -->
+
+<style>
+  /* ===== Ad landing page (/call) ===== */
+
+  /* Hero */
+  .lp-hero {
+    background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-dark-2) 100%);
+    color: #fff; text-align: center; padding: 40px 24px 72px;
+  }
+  .lp-hero .logo-svg { height: 34px; filter: brightness(0) invert(1); margin: 0 auto 40px; display: block; }
+  .lp-eyebrow {
+    display: inline-block; background: rgba(155, 130, 201, 0.18); color: var(--purple-accent);
+    font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 8px 18px; border-radius: 999px; margin-bottom: 24px;
+  }
+  .lp-hero h1 {
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.08;
+    font-size: clamp(34px, 5vw, 58px); max-width: 21ch; margin: 0 auto 20px;
+  }
+  .lp-hero h1 .accent { color: var(--purple-accent); }
+  .lp-hero .lp-sub {
+    color: rgba(255,255,255,0.75); font-size: clamp(16px, 2vw, 19px);
+    max-width: 62ch; margin: 0 auto 40px; line-height: 1.6;
+  }
+  .lp-video {
+    max-width: 860px; margin: 0 auto 36px; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45); background: #000;
+  }
+  .lp-video { position: relative; }
+  .lp-video video { display: block; width: 100%; height: auto; }
+  .lp-play {
+    position: absolute; inset: 0; width: 100%; border: none; cursor: pointer;
+    background: rgba(15, 11, 38, 0.18); display: flex; align-items: center;
+    justify-content: center; transition: background .2s ease;
+  }
+  .lp-play:hover { background: rgba(15, 11, 38, 0.05); }
+  .lp-play span {
+    width: 86px; height: 86px; border-radius: 50%; background: var(--purple);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.45); transition: transform .2s ease;
+  }
+  .lp-play:hover span { transform: scale(1.08); }
+  .lp-play span::after {
+    content: ""; display: block; margin-left: 7px;
+    border-left: 26px solid #fff; border-top: 16px solid transparent;
+    border-bottom: 16px solid transparent;
+  }
+  .lp-micro { color: rgba(255,255,255,0.55); font-size: 14px; margin-top: 14px; }
+
+  /* Studio photo strip */
+  .lp-strip { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .lp-strip img {
+    width: 100%; height: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block;
+  }
+  @media (max-width: 760px) {
+    .lp-strip { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Logos */
+  .lp-logos { padding: 44px 24px; text-align: center; }
+  .lp-logos p {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 26px;
+  }
+  .lp-logos__row {
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+    gap: 32px 44px; max-width: 1000px; margin: 0 auto;
+  }
+  .lp-logos__row img { height: 30px; width: auto; filter: grayscale(1); opacity: 0.55; }
+
+  /* Wizard */
+  .wiz { max-width: 640px; margin: 0 auto; }
+  .wiz-card {
+    background: #fff; border: 1px solid var(--divider); border-radius: 24px;
+    padding: 36px; box-shadow: 0 20px 60px rgba(21, 15, 43, 0.06);
+  }
+  .wiz-progress { display: flex; justify-content: center; gap: 8px; margin-bottom: 28px; }
+  .wiz-progress .dot {
+    width: 34px; height: 5px; border-radius: 999px; background: var(--divider);
+    transition: background .25s ease;
+  }
+  .wiz-progress .dot.is-on { background: var(--purple); }
+  .wiz-panel { display: none; animation: wizIn .3s ease; }
+  .wiz-panel.is-active { display: block; }
+  @keyframes wizIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .wiz-q { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .wiz-hint { color: var(--muted); font-size: 15px; margin-bottom: 22px; }
+  .chip-col { display: flex; flex-direction: column; gap: 10px; }
+  .chip {
+    border: 1.5px solid var(--divider); border-radius: 14px; background: #fff;
+    padding: 15px 18px; cursor: pointer; font-family: var(--sans); font-size: 15.5px;
+    font-weight: 600; color: var(--ink); text-align: left; transition: all .15s ease;
+  }
+  .chip:hover { border-color: var(--purple-accent); background: var(--purple-soft); }
+  .chip.is-picked { border-color: var(--purple); background: var(--purple-soft); color: var(--purple); }
+  .wiz-back {
+    background: none; border: none; color: var(--muted); font-family: var(--sans);
+    font-size: 14px; font-weight: 600; cursor: pointer; padding: 0; margin-top: 22px;
+  }
+  .wiz-back:hover { color: var(--ink); }
+  .wiz-field { display: block; margin-bottom: 16px; }
+  .wiz-field span { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+  .wiz-field input, .wiz-field textarea {
+    width: 100%; border: 1.5px solid var(--divider); border-radius: 12px;
+    padding: 13px 15px; font-family: var(--sans); font-size: 15.5px; color: var(--ink);
+    background: #fff; outline: none; transition: border-color .15s ease;
+  }
+  .wiz-field input:focus, .wiz-field textarea:focus { border-color: var(--purple); }
+  .wiz-status { font-size: 14px; color: #B4433A; margin-top: 12px; min-height: 20px; }
+  .wiz-done { text-align: center; padding: 12px 0; }
+  .wiz-done__icon {
+    width: 56px; height: 56px; border-radius: 50%; background: var(--purple-soft);
+    color: var(--purple); font-size: 26px; display: flex; align-items: center;
+    justify-content: center; margin: 0 auto 18px;
+  }
+
+  /* Checklist section */
+  .lp-sound { max-width: 720px; margin: 0 auto; }
+  .lp-sound .check-list { margin: 28px 0 36px; }
+
+  /* Founder */
+  .lp-founder {
+    display: grid; grid-template-columns: 300px 1fr; gap: 48px; align-items: center;
+    max-width: 900px; margin: 0 auto;
+  }
+  .lp-founder img { width: 100%; border-radius: 20px; display: block; }
+  .lp-founder p { color: var(--ink-soft); margin-bottom: 16px; line-height: 1.65; }
+
+  /* Final CTA */
+  .lp-final {
+    background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-dark-2) 100%);
+    color: #fff; text-align: center; padding: 88px 24px;
+  }
+  .lp-final h2 { font-size: clamp(30px, 4vw, 44px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 14px; }
+  .lp-final p { color: rgba(255,255,255,0.7); margin-bottom: 32px; }
+
+  /* Slim footer */
+  .lp-footer { padding: 36px 24px; text-align: center; font-size: 13.5px; color: var(--muted); }
+  .lp-footer a { color: var(--muted); text-decoration: underline; }
+
+  section.lp-pad { padding: 80px 24px; }
+
+  @media (max-width: 760px) {
+    .lp-founder { grid-template-columns: 1fr; gap: 28px; }
+    .lp-founder img { max-width: 340px; margin: 0 auto; }
+    .wiz-card { padding: 26px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="lp-hero">
+  <img src="assets/logo.svg" alt="Purpose Productions" class="logo-svg">
+  <div class="lp-eyebrow">For service-based business owners</div>
+  <h1>A podcast that wins you clients. <span class="accent">Done for you.</span></h1>
+  <p class="lp-sub">We film, edit and publish everything from our South Melbourne studio. You turn up and talk — one afternoon can bank a month of content.</p>
+
+  <div class="lp-video">
+    <video id="vsl" src="assets/call-vsl.mp4" poster="assets/call-vsl-poster.jpg" preload="metadata" playsinline></video>
+    <button class="lp-play" id="vsl-play" aria-label="Play the video">
+      <span></span>
+    </button>
+  </div>
+
+  <a class="btn btn--primary" href="#book">Book a free 20-minute planning call →</a>
+  <p class="lp-micro">You'll leave with an episode plan and a clear cost — whether you work with us or not.</p>
+</header>
+
+<!-- LOGOS -->
+<section class="lp-logos">
+  <p>Trusted by Melbourne businesses</p>
+  <div class="lp-logos__row">
+    <img src="assets/logos/1.png" alt="Client logo">
+    <img src="assets/logos/2.png" alt="Client logo">
+    <img src="assets/logos/3.png" alt="Client logo">
+    <img src="assets/logos/4.png" alt="Client logo">
+    <img src="assets/logos/5.png" alt="Client logo">
+    <img src="assets/logos/6.png" alt="Client logo">
+    <img src="assets/logos/7.png" alt="Client logo">
+    <img src="assets/logos/8.png" alt="Client logo">
+    <img src="assets/logos/9.png" alt="Client logo">
+  </div>
+</section>
+
+<!-- QUALIFIER + BOOKING -->
+<section class="alt lp-pad" id="book">
+  <div class="wrap--narrow">
+    <div class="sec-head--center center">
+      <span class="sec-eyebrow">Next step</span>
+      <h2 class="sec-title" style="margin-left:auto;margin-right:auto;">Book a free planning call.</h2>
+      <p class="sec-lede">Twenty minutes. We map your show — format, first episodes, exact costs — and the plan is yours to keep either way.</p>
+    </div>
+
+    <div class="wiz">
+      <div class="wiz-card">
+        <div class="wiz-progress" aria-hidden="true">
+          <div class="dot is-on" data-dot="1"></div>
+          <div class="dot" data-dot="2"></div>
+          <div class="dot" data-dot="3"></div>
+          <div class="dot" data-dot="4"></div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="wiz-panel is-active" data-step="1">
+          <div class="wiz-q">What kind of business do you run?</div>
+          <div class="wiz-hint">So we come to the call already knowing your world.</div>
+          <div class="chip-col" data-answer="Business type">
+            <button type="button" class="chip">Professional services — legal, accounting, finance</button>
+            <button type="button" class="chip">Consulting or coaching</button>
+            <button type="button" class="chip">Agency or creative services</button>
+            <button type="button" class="chip">Health, property or trades</button>
+            <button type="button" class="chip">Something else</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="wiz-panel" data-step="2">
+          <div class="wiz-q">How big is your team?</div>
+          <div class="wiz-hint">Rough numbers are fine.</div>
+          <div class="chip-col" data-answer="Team size">
+            <button type="button" class="chip">Just me for now</button>
+            <button type="button" class="chip">2–5 people</button>
+            <button type="button" class="chip">6–20 people</button>
+            <button type="button" class="chip">More than 20</button>
+          </div>
+          <button type="button" class="wiz-back">← Back</button>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="wiz-panel" data-step="3">
+          <div class="wiz-q">Where are you at with content?</div>
+          <div class="wiz-hint">There's no wrong answer — it just shapes the call.</div>
+          <div class="chip-col" data-answer="Content stage">
+            <button type="button" class="chip">Haven't started yet</button>
+            <button type="button" class="chip">Started, then it stalled</button>
+            <button type="button" class="chip">Publishing, but want better quality</button>
+            <button type="button" class="chip">Not sure a podcast is right for me</button>
+          </div>
+          <button type="button" class="wiz-back">← Back</button>
+        </div>
+
+        <!-- Step 4: details -->
+        <div class="wiz-panel" data-step="4">
+          <div class="wiz-q">Last step — where do we reach you?</div>
+          <div class="wiz-hint">We'll come back within one business day to lock in a time.</div>
+          <form id="call-form" novalidate>
+            <label class="wiz-field"><span>Your name</span>
+              <input type="text" name="name" autocomplete="name" required>
+            </label>
+            <label class="wiz-field"><span>Business email</span>
+              <input type="email" name="email" autocomplete="email" required>
+            </label>
+            <label class="wiz-field"><span>Business name</span>
+              <input type="text" name="company" autocomplete="organization" required>
+            </label>
+            <label class="wiz-field"><span>Website (optional)</span>
+              <input type="text" name="biz_site" autocomplete="url" placeholder="yourbusiness.com.au">
+            </label>
+            <label class="wiz-field"><span>Anything you want us to know (optional)</span>
+              <textarea name="notes" rows="2"></textarea>
+            </label>
+            <!-- Honeypot: real users never see or fill this -->
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+            <button type="submit" class="btn btn--primary" style="width:100%;justify-content:center;">Request my call →</button>
+            <p class="wiz-status" data-role="status"></p>
+          </form>
+          <button type="button" class="wiz-back">← Back</button>
+        </div>
+
+        <!-- Success -->
+        <div class="wiz-panel" data-step="done">
+          <div class="wiz-done">
+            <div class="wiz-done__icon">✓</div>
+            <div class="wiz-q">Thanks — that's everything we need.</div>
+            <p class="wiz-hint" style="margin-bottom:0;">We'll come back to you within one business day to lock in a time that suits.</p>
+            <!-- Calendly (or Cal.com) inline embed goes here once the account is set up,
+                 so people can pick a time on the spot instead of waiting for our reply. -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOUND LIKE YOU -->
+<section class="lp-pad">
+  <div class="lp-sound center">
+    <span class="sec-eyebrow">A quick gut check</span>
+    <h2 class="sec-title" style="margin-left:auto;margin-right:auto;">Does this sound like you.</h2>
+    <ul class="check-list" style="text-align:left;">
+      <li>Clients buy you before they buy the service — trust is what wins you the work</li>
+      <li>You know you should be putting out content, but it keeps sliding down the list</li>
+      <li>You have expertise worth hearing — you just don't want a second job as a video editor</li>
+      <li>You'd trade an hour of daily fiddling for one focused afternoon a month</li>
+    </ul>
+    <a class="btn btn--primary" href="#book">Sounds like me →</a>
+  </div>
+</section>
+
+<!-- STUDIO PHOTO STRIP -->
+<section class="lp-strip" aria-label="Recent shows recorded in our studio">
+  <img src="assets/lp-guest-1.jpg" alt="Podcast host recording an episode in the Purpose Productions studio">
+  <img src="assets/lp-guest-2.jpg" alt="Guest being interviewed on a custom-dressed podcast set">
+  <img src="assets/lp-guest-3.jpg" alt="Business podcast recording on a custom set in South Melbourne">
+  <img src="assets/lp-guest-4.jpg" alt="Guest recording a branded podcast episode on the studio couch">
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="alt lp-pad">
+  <div class="wrap">
+    <div class="sec-head--center center">
+      <span class="sec-eyebrow">How it works</span>
+      <h2 class="sec-title" style="margin-left:auto;margin-right:auto;">Three steps. <span class="accent">One afternoon a month.</span></h2>
+    </div>
+    <div class="features">
+      <div class="card">
+        <div class="card__icon">1</div>
+        <div class="card__title">Book a call</div>
+        <p class="card__body">Pick a time that suits. We turn up having already looked at your business, so the twenty minutes count.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon">2</div>
+        <div class="card__title">Get your show plan</div>
+        <p class="card__body">Format, first episode topics, guest ideas and exact costs. The plan is yours to keep, whoever you record with.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon">3</div>
+        <div class="card__title">Lock in your recording slot</div>
+        <p class="card__body">Like the plan? We hold a studio date for you. Then you just turn up and talk — we film, edit, publish and hand you the clips.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="lp-pad">
+  <div class="wrap--narrow center">
+    <span class="sec-eyebrow">Client for two years</span>
+    <p style="font-size:clamp(22px, 2.6vw, 32px); font-weight:500; line-height:1.4; letter-spacing:-0.01em; color:var(--ink); margin: 24px auto 32px; max-width: 40ch;">"Fantastic production company. James and his team have produced our podcast The CX Show for two years now and the quality is top notch. Response time is always quick and the quality of the episodes and clips are fantastic. I can't recommend Purpose Productions enough."</p>
+    <p style="font-weight:600; color:var(--ink);">ColdXpress</p>
+    <p style="font-size:14px; color:var(--muted);">The CX Show</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="alt lp-pad">
+  <div class="wrap">
+    <div class="sec-head--center center">
+      <span class="sec-eyebrow">FAQ</span>
+      <h2 class="sec-title" style="margin-left:auto;margin-right:auto;">Fair questions. <span class="accent">Straight answers.</span></h2>
+    </div>
+    <div class="faq">
+      <details class="faq__item">
+        <summary class="faq__q">What actually happens on the call?</summary>
+        <div class="faq__a">Twenty minutes with James, not a sales script. We map a show format that fits your business, sketch your first episodes and give you exact costs. If it's not a fit, we'll say so — and the plan is still yours.</div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">How much does it cost?</summary>
+        <div class="faq__a">It depends on the format and how often you record, so we price it on the planning call — you'll leave with exact costs, and series get bulk pricing. One session covers everything: studio, full audio and video, and a producer running the day.</div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">I've never podcasted before. Does that matter?</summary>
+        <div class="faq__a">Most of our clients hadn't either. If you can hold a conversation with a client, you can record an episode — the producer handles structure, pacing and everything technical.</div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">How much of my time does it take?</summary>
+        <div class="faq__a">One afternoon can bank a month of episodes — up to eight in a full day if you want to get ahead. We handle editing, clips and publishing, so your involvement ends when the recording does.</div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">What if nobody listens?</summary>
+        <div class="faq__a">For a service business, a podcast earns its keep well before the download numbers do. It gives prospects a reason to meet you, gives referrers something to send, and gives your socials and sales conversations a steady supply of clips.</div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Do you handle editing and publishing?</summary>
+        <div class="faq__a">Yes. First cut in three to four days as standard, and we can publish straight to Spotify, Apple Podcasts and YouTube under your account — or hand you finished files to publish yourself.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="lp-pad">
+  <div class="lp-founder">
+    <!-- Swap for a photo of James when there's a good one handy -->
+    <img src="assets/studio-desk.jpg" alt="Inside the Purpose Productions studio, South Melbourne">
+    <div>
+      <span class="sec-eyebrow">Who you'll talk to</span>
+      <h2 class="sec-title" style="margin-bottom:18px;">Hey, I'm James.</h2>
+      <p>I've been producing podcasts and video for Melbourne businesses since 2017, from our studio at 111 Cecil Street in South Melbourne.</p>
+      <p>I started Purpose Productions because I kept meeting brilliant business owners who were invisible online — not for lack of expertise, but for lack of time and production. That's the gap we fill.</p>
+      <p>The planning call is with me, not a salesperson. Worst case, you leave with a plan you could run yourself.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="lp-final">
+  <h2>Ready when you are.</h2>
+  <p>Twenty minutes. An episode plan and a clear cost, whether you book a session or not.</p>
+  <a class="btn btn--primary" href="#book">Book a free planning call →</a>
+</section>
+
+<footer class="lp-footer">
+  <p>Purpose Productions · Level 5, 111 Cecil St, South Melbourne VIC · <a href="mailto:info@purposeproductions.co">info@purposeproductions.co</a></p>
+  <p style="margin-top:8px;"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+</footer>
+
+<script>
+  (function () {
+    var vsl = document.getElementById('vsl');
+    var playBtn = document.getElementById('vsl-play');
+    if (vsl && playBtn) {
+      playBtn.addEventListener('click', function () {
+        playBtn.style.display = 'none';
+        vsl.controls = true;
+        vsl.play();
+      });
+    }
+  })();
+
+  (function () {
+    var answers = {};
+    var order = ['1', '2', '3', '4'];
+    var current = '1';
+
+    function show(step) {
+      current = step;
+      document.querySelectorAll('.wiz-panel').forEach(function (p) {
+        p.classList.toggle('is-active', p.getAttribute('data-step') === step);
+      });
+      var idx = order.indexOf(step);
+      document.querySelectorAll('.wiz-progress .dot').forEach(function (d, i) {
+        d.classList.toggle('is-on', step === 'done' || i <= idx);
+      });
+      if (step !== '1') {
+        var card = document.querySelector('.wiz-card');
+        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    document.querySelectorAll('.chip-col').forEach(function (col) {
+      var key = col.getAttribute('data-answer');
+      col.querySelectorAll('.chip').forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          col.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('is-picked'); });
+          chip.classList.add('is-picked');
+          answers[key] = chip.textContent.trim();
+          var next = order[order.indexOf(current) + 1];
+          setTimeout(function () { show(next); }, 180);
+        });
+      });
+    });
+
+    document.querySelectorAll('.wiz-back').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var prev = order[order.indexOf(current) - 1];
+        if (prev) show(prev);
+      });
+    });
+
+    var form = document.getElementById('call-form');
+    var status = form.querySelector('[data-role="status"]');
+    var submit = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var data = new FormData(form);
+      var name = (data.get('name') || '').toString().trim();
+      var email = (data.get('email') || '').toString().trim();
+      var company = (data.get('company') || '').toString().trim();
+
+      if (!name || !email || !company) {
+        status.textContent = 'Please fill in your name, email and business name.';
+        return;
+      }
+
+      var message =
+        'New call request from the ads landing page (/call).\n\n' +
+        'Business type: ' + (answers['Business type'] || '—') + '\n' +
+        'Team size: ' + (answers['Team size'] || '—') + '\n' +
+        'Content stage: ' + (answers['Content stage'] || '—') + '\n' +
+        'Business name: ' + company + '\n' +
+        'Website: ' + ((data.get('biz_site') || '').toString().trim() || '—') + '\n\n' +
+        'Notes: ' + ((data.get('notes') || '').toString().trim() || '—');
+
+      submit.disabled = true;
+      var originalText = submit.textContent;
+      submit.textContent = 'Sending…';
+      status.textContent = '';
+
+      try {
+        var resp = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            message: message,
+            website: (data.get('website') || '').toString(),
+          }),
+        });
+        var body = await resp.json().catch(function () { return {}; });
+
+        if (resp.ok) {
+          if (typeof fbq === 'function') fbq('track', 'Lead');
+          show('done');
+        } else {
+          status.textContent = body.error || 'Something went wrong. Try again in a moment.';
+        }
+      } catch (err) {
+        status.textContent = 'Network issue — try again, or email info@purposeproductions.co directly.';
+      } finally {
+        submit.disabled = false;
+        submit.textContent = originalText;
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
