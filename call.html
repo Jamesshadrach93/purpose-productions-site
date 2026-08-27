@@ -279,6 +279,9 @@ src="https://www.facebook.com/tr?id=1085882244095537&ev=PageView&noscript=1"
             <label class="wiz-field"><span>Business email</span>
               <input type="email" name="email" autocomplete="email" required>
             </label>
+            <label class="wiz-field"><span>Mobile number</span>
+              <input type="tel" name="phone" autocomplete="tel" required>
+            </label>
             <label class="wiz-field"><span>Business name</span>
               <input type="text" name="company" autocomplete="organization" required>
             </label>
@@ -496,10 +499,15 @@ src="https://www.facebook.com/tr?id=1085882244095537&ev=PageView&noscript=1"
       var data = new FormData(form);
       var name = (data.get('name') || '').toString().trim();
       var email = (data.get('email') || '').toString().trim();
+      var phone = (data.get('phone') || '').toString().trim();
       var company = (data.get('company') || '').toString().trim();
 
-      if (!name || !email || !company) {
-        status.textContent = 'Please fill in your name, email and business name.';
+      if (!name || !email || !phone || !company) {
+        status.textContent = 'Please fill in your name, email, mobile number and business name.';
+        return;
+      }
+      if (phone.replace(/[^0-9]/g, '').length < 8) {
+        status.textContent = 'That mobile number looks too short.';
         return;
       }
 
@@ -508,6 +516,7 @@ src="https://www.facebook.com/tr?id=1085882244095537&ev=PageView&noscript=1"
         'Business type: ' + (answers['Business type'] || '—') + '\n' +
         'Team size: ' + (answers['Team size'] || '—') + '\n' +
         'Content stage: ' + (answers['Content stage'] || '—') + '\n' +
+        'Mobile: ' + phone + '\n' +
         'Business name: ' + company + '\n' +
         'Website: ' + ((data.get('biz_site') || '').toString().trim() || '—') + '\n\n' +
         'Notes: ' + ((data.get('notes') || '').toString().trim() || '—');
